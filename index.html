@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voyanda Reisen – Ihr Reisebüro in Musterstadt</title>
+<meta name="description" content="Voyanda Reisen Ltd. – familiengeführtes Reisebüro. Beratung zu Flügen, Hotels, Mietwagen sowie Pauschal-, Städte-, Tages- und Exklusivreisen. (Demo-Seite, fiktive Daten.)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#102F2D;        /* tiefes Petrol-Grün, Fließtext */
+    --petrol:#1C5A5F;     /* Petrol, Akzentflächen */
+    --sand:#F3ECDD;       /* Seitenhintergrund (Sand) */
+    --paper:#FBF7EE;      /* Karten */
+    --sand-2:#EADFC8;     /* tiefere Sandfläche */
+    --amber:#DD9A2B;      /* Goldene-Stunde-Akzent */
+    --amber-deep:#C07F16;
+    --line:rgba(16,47,45,.16);
+    --line-strong:rgba(16,47,45,.32);
+    --dark:#0C2A2C;       /* dunkles Band */
+    --shadow:0 1px 0 rgba(16,47,45,.06), 0 18px 40px -28px rgba(12,42,44,.55);
+    --wrap:1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:76px;}
+  body{
+    margin:0; background:var(--sand); color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif; font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif; font-weight:600; line-height:1.05; margin:0;}
+  a{color:inherit;}
+  .wrap{max-width:var(--wrap); margin-inline:auto; padding-inline:24px;}
+  .eyebrow{
+    font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--amber-deep); margin:0 0 14px;
+  }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:60; background:rgba(243,236,221,.86);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .brand{display:flex; align-items:center; gap:11px; font-family:"Fraunces",serif; font-weight:600; font-size:20px; text-decoration:none; letter-spacing:-.01em;}
+  .brand svg{flex:0 0 auto;}
+  .nav-links{display:flex; align-items:center; gap:28px; list-style:none; margin:0; padding:0;}
+  .nav-links a{font-size:15px; text-decoration:none; opacity:.82; transition:opacity .15s;}
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{
+    font-family:"Space Mono",monospace; font-size:13px; letter-spacing:.04em;
+    text-decoration:none; padding:9px 16px; border:1.5px solid var(--ink); border-radius:999px;
+    transition:background .15s,color .15s;
+  }
+  .nav-cta:hover{background:var(--ink); color:var(--sand);}
+  .nav-toggle{display:none; background:none; border:0; padding:8px; cursor:pointer; color:var(--ink);}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative; overflow:hidden; padding:88px 0 96px;}
+  .hero-sky{
+    position:absolute; inset:0 0 auto 0; height:100%; z-index:0; pointer-events:none;
+  }
+  .hero-sky svg{width:100%; height:100%; display:block;}
+  .sun{transform-origin:center; animation:rise 1.6s cubic-bezier(.16,.84,.34,1) both;}
+  @keyframes rise{from{transform:translateY(46px); opacity:0;} to{transform:translateY(0); opacity:1;}}
+  .hero-inner{position:relative; z-index:1; max-width:720px;}
+  .hero h1{font-size:clamp(46px,7.6vw,86px); letter-spacing:-.02em;}
+  .hero h1 em{font-style:normal; color:var(--amber-deep);}
+  .hero p.lede{font-size:clamp(18px,2.2vw,21px); margin:26px 0 34px; max-width:560px; color:#28433f;}
+  .hero-actions{display:flex; flex-wrap:wrap; gap:14px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:9px; font-weight:500;
+    text-decoration:none; padding:14px 24px; border-radius:999px; font-size:16px;
+    transition:transform .12s ease, background .15s, box-shadow .15s;
+  }
+  .btn-primary{background:var(--ink); color:var(--sand); box-shadow:var(--shadow);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border:1.5px solid var(--line-strong);}
+  .btn-ghost:hover{background:var(--paper);}
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:26px; margin-top:52px;
+    font-family:"Space Mono",monospace; font-size:13px; letter-spacing:.03em; color:#3a544f;
+  }
+  .hero-meta span{display:flex; align-items:center; gap:9px;}
+  .hero-meta b{color:var(--ink); font-weight:700;}
+
+  /* ---------- Section frame ---------- */
+  .band{padding:84px 0;}
+  .band-head{display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:44px; flex-wrap:wrap;}
+  .band-head h2{font-size:clamp(30px,4.4vw,44px); letter-spacing:-.01em; max-width:16ch;}
+  .band-head .note{max-width:38ch; color:#3a544f; font-size:15.5px;}
+
+  /* ---------- Leistungen ---------- */
+  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .card{
+    background:var(--paper); border:1px solid var(--line); border-radius:16px;
+    padding:26px 24px 30px; position:relative; transition:transform .16s ease, box-shadow .16s ease, border-color .16s;
+  }
+  .card:hover{transform:translateY(-4px); box-shadow:var(--shadow); border-color:var(--line-strong);}
+  .card .idx{font-family:"Space Mono",monospace; font-size:12px; color:var(--amber-deep); letter-spacing:.1em;}
+  .card h3{font-size:24px; margin:14px 0 10px;}
+  .card p{margin:0; font-size:15px; color:#33504b;}
+  .card .rule{height:1px; background:var(--line); margin:18px 0 0;}
+
+  /* ---------- Info-Band (Zeiten + Kontakt) ---------- */
+  .info{background:var(--dark); color:#EBE3D2;}
+  .info .eyebrow{color:var(--amber);}
+  .info-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px;}
+  .info h2{color:#FBF7EE; font-size:clamp(28px,4vw,40px); margin-bottom:26px;}
+  .board{border-top:1px solid rgba(235,227,210,.22);}
+  .board-row{
+    display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+    padding:15px 0; border-bottom:1px solid rgba(235,227,210,.22);
+  }
+  .board-row .day{font-family:"Space Mono",monospace; font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:#c9bfa9;}
+  .board-row .hrs{font-family:"Fraunces",serif; font-size:20px; color:#FBF7EE;}
+  .board-row.closed .hrs{color:#9a8f79; font-family:"Space Mono",monospace; font-size:14px; letter-spacing:.05em;}
+  .contact-list{list-style:none; margin:0; padding:0; display:grid; gap:20px;}
+  .contact-list li{display:grid; gap:3px;}
+  .contact-list .lbl{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#c9bfa9;}
+  .contact-list .val{font-size:18px; color:#FBF7EE;}
+  .contact-list a{color:#FBF7EE; text-decoration:none; border-bottom:1px solid rgba(221,154,43,.6);}
+  .contact-list a:hover{border-color:var(--amber);}
+  .hotline{margin-top:26px; padding:16px 18px; border:1px solid rgba(221,154,43,.4); border-radius:12px; background:rgba(221,154,43,.08); font-size:14.5px;}
+  .hotline b{color:var(--amber); font-family:"Space Mono",monospace; letter-spacing:.03em;}
+
+  /* ---------- FAQ ---------- */
+  .faq{max-width:820px;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:0; cursor:pointer;
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+    padding:22px 0; font-family:"Fraunces",serif; font-size:20px; color:var(--ink);
+  }
+  .faq-q:hover{color:var(--amber-deep);}
+  .faq-q .mark{flex:0 0 auto; width:26px; height:26px; position:relative;}
+  .faq-q .mark::before,.faq-q .mark::after{content:""; position:absolute; background:var(--amber-deep); transition:transform .22s ease;}
+  .faq-q .mark::before{top:12px; left:3px; width:20px; height:2px;}
+  .faq-q .mark::after{top:3px; left:12px; width:2px; height:20px;}
+  .faq-item[open] .faq-q .mark::after{transform:scaleY(0);}
+  .faq-a{padding:0 46px 24px 0; color:#33504b; font-size:16px;}
+  details.faq-item summary{list-style:none;}
+  details.faq-item summary::-webkit-details-marker{display:none;}
+
+  /* ---------- Footer ---------- */
+  .foot{padding:56px 0 40px; border-top:1px solid var(--line);}
+  .foot-top{display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap; align-items:flex-start;}
+  .foot-links{display:flex; gap:24px; flex-wrap:wrap; list-style:none; margin:0; padding:0; font-size:14.5px;}
+  .foot-links a{text-decoration:none; opacity:.8;}
+  .foot-links a:hover{opacity:1;}
+  .disclaimer{
+    margin-top:34px; padding-top:22px; border-top:1px dashed var(--line-strong);
+    font-family:"Space Mono",monospace; font-size:12.5px; line-height:1.7; color:#5a6f6a; max-width:70ch;
+  }
+
+  /* ---------- Chat-Launcher (Dummy-Platzhalter) ---------- */
+  .chat-fab{
+    position:fixed; right:22px; bottom:22px; z-index:80;
+    width:60px; height:60px; border-radius:50%; border:0; cursor:pointer;
+    background:var(--amber); color:var(--dark); box-shadow:0 12px 30px -8px rgba(12,42,44,.6);
+    display:grid; place-items:center; transition:transform .15s ease;
+  }
+  .chat-fab:hover{transform:scale(1.06);}
+  .chat-panel{
+    position:fixed; right:22px; bottom:94px; z-index:80; width:min(320px,calc(100vw - 44px));
+    background:var(--paper); border:1px solid var(--line-strong); border-radius:16px;
+    box-shadow:0 24px 60px -20px rgba(12,42,44,.55); padding:22px; display:none;
+  }
+  .chat-panel.open{display:block; animation:pop .18s ease both;}
+  @keyframes pop{from{transform:translateY(10px); opacity:0;} to{transform:translateY(0); opacity:1;}}
+  .chat-panel .eyebrow{margin-bottom:10px;}
+  .chat-panel h3{font-size:20px; margin-bottom:8px;}
+  .chat-panel p{font-size:14px; color:#33504b; margin:0;}
+  .chat-panel code{font-family:"Space Mono",monospace; font-size:12px; background:var(--sand-2); padding:1px 6px; border-radius:5px;}
+
+  /* ---------- Focus / Motion ---------- */
+  a:focus-visible,button:focus-visible,.btn:focus-visible,.faq-q:focus-visible{
+    outline:3px solid var(--amber); outline-offset:3px; border-radius:6px;
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important; scroll-behavior:auto;}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .info-grid{grid-template-columns:1fr; gap:44px;}
+  }
+  @media (max-width:640px){
+    body{font-size:16px;}
+    .nav-links{
+      position:absolute; top:64px; left:0; right:0; background:var(--sand);
+      border-bottom:1px solid var(--line); flex-direction:column; align-items:stretch;
+      gap:0; padding:8px 0; display:none;
+    }
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:13px 24px;}
+    .nav-links .nav-cta{margin:8px 24px; text-align:center;}
+    .nav-toggle{display:inline-flex;}
+    .grid{grid-template-columns:1fr;}
+    .band{padding:64px 0;}
+    .hero{padding:66px 0 74px;}
+    .hero-meta{gap:16px 22px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <circle cx="13" cy="13" r="12" stroke="#102F2D" stroke-width="1.5"/>
+        <path d="M1.6 15.5h22.8" stroke="#102F2D" stroke-width="1.5"/>
+        <circle cx="13" cy="10.5" r="4.4" fill="#DD9A2B"/>
+      </svg>
+      Voyanda&nbsp;Reisen
+    </a>
+    <button class="nav-toggle" aria-label="Menü" aria-expanded="false" id="navToggle">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#leistungen">Leistungen</a></li>
+      <li><a href="#zeiten">Öffnungszeiten</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="#faq">Fragen</a></li>
+      <li><a class="nav-cta" href="#kontakt">Beratung</a></li>
+    </ul>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-sky" aria-hidden="true">
+    <svg viewBox="0 0 1440 620" preserveAspectRatio="xMidYMax slice">
+      <g class="sun">
+        <circle cx="1150" cy="330" r="120" fill="#DD9A2B" opacity="0.16"/>
+        <circle cx="1150" cy="330" r="82" fill="#DD9A2B" opacity="0.22"/>
+        <circle cx="1150" cy="330" r="48" fill="#DD9A2B" opacity="0.9"/>
+      </g>
+      <g stroke="#102F2D" stroke-width="1" opacity="0.14">
+        <path d="M0 470h1440"/><path d="M0 512h1440"/><path d="M0 554h1440"/>
+      </g>
+      <path d="M0 470h1440" stroke="#102F2D" stroke-width="1.5" opacity="0.4"/>
+    </svg>
+  </div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Familiengeführt seit 2004</p>
+    <h1>Die Welt, <em>persönlich</em> geplant.</h1>
+    <p class="lede">Voyanda Reisen ist ein inhabergeführtes Reisebüro mit rund 20 Kolleginnen und Kollegen – wir beraten Sie persönlich zu Flügen, Hotels, Mietwagen sowie Pauschal-, Städte-, Tages- und Exklusivreisen.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#kontakt">Beratung starten →</a>
+      <a class="btn btn-ghost" href="#leistungen">Leistungen ansehen</a>
+    </div>
+    <div class="hero-meta">
+      <span><b>~20</b> Reiseexpert:innen</span>
+      <span><b>Mo–Sa</b> vor Ort in Musterstadt</span>
+      <span><b>24/7</b> Notfall-Hotline für Reisende</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LEISTUNGEN ===================== -->
+<section class="band" id="leistungen">
+  <div class="wrap">
+    <div class="band-head">
+      <h2>Alles für Ihre Reise, aus einer Hand.</h2>
+      <p class="note">Von der schnellen Flugbuchung bis zur individuell geplanten Fernreise – sagen Sie uns, wohin es gehen soll.</p>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <span class="idx">01 · Flug &amp; Transport</span>
+        <h3>Flüge</h3>
+        <p>Linien- und Charterflüge weltweit, Economy bis First Class – auch als reine Flugbuchung ohne Hotel.</p>
+        <div class="rule"></div>
+      </article>
+      <article class="card">
+        <span class="idx">02 · Unterkunft</span>
+        <h3>Hotels</h3>
+        <p>Vom günstigen Stadthotel bis zum Luxusresort, im In- und Ausland, mit oder ohne Verpflegung.</p>
+        <div class="rule"></div>
+      </article>
+      <article class="card">
+        <span class="idx">03 · Mobilität</span>
+        <h3>Mietwagen</h3>
+        <p>Vom Kleinwagen bis zum Van, Abholung meist am Flughafen. Zusatzfahrer und Kindersitze auf Wunsch.</p>
+        <div class="rule"></div>
+      </article>
+      <article class="card">
+        <span class="idx">04 · Komplettpaket</span>
+        <h3>Pauschalreisen</h3>
+        <p>Flug, Hotel, Transfer und Verpflegung als abgesichertes Paket – von Frühstück bis All-Inclusive.</p>
+        <div class="rule"></div>
+      </article>
+      <article class="card">
+        <span class="idx">05 · Kurztrip</span>
+        <h3>Städtereisen</h3>
+        <p>Wien, Rom, Barcelona, New York: An- und Abreise plus zentrales Hotel, optional mit Stadtführung.</p>
+        <div class="rule"></div>
+      </article>
+      <article class="card">
+        <span class="idx">06 · Ausflug</span>
+        <h3>Tages- &amp; Busreisen</h3>
+        <p>Geführte Tagesausflüge und mehrtägige Bustouren mit Reisebegleitung ab regionalen Zustiegsstellen.</p>
+        <div class="rule"></div>
+      </article>
+      <article class="card">
+        <span class="idx">07 · Premium</span>
+        <h3>Exklusivreisen</h3>
+        <p>Individuell geplante Privatrundreisen, Luxuskreuzfahrten und Fernziele – auf Wunsch mit Beratungstermin.</p>
+        <div class="rule"></div>
+      </article>
+      <article class="card" style="background:var(--sand-2); border-style:dashed;">
+        <span class="idx">＋ Und mehr</span>
+        <h3>Versicherung, Gutscheine &amp; Firmenreisen</h3>
+        <p>Reiseschutz, Reisegutscheine über frei wählbare Beträge sowie Firmen- und Gruppenreisen ab 10 Personen.</p>
+        <div class="rule"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ZEITEN + KONTAKT ===================== -->
+<section class="band info" id="zeiten">
+  <div class="wrap">
+    <div class="info-grid">
+      <div>
+        <p class="eyebrow">Öffnungszeiten</p>
+        <h2>Wann wir für Sie da sind.</h2>
+        <div class="board">
+          <div class="board-row"><span class="day">Montag – Freitag</span><span class="hrs">09:00 – 18:00</span></div>
+          <div class="board-row"><span class="day">Samstag</span><span class="hrs">10:00 – 14:00</span></div>
+          <div class="board-row closed"><span class="day">Sonn- &amp; Feiertage</span><span class="hrs">geschlossen</span></div>
+        </div>
+        <div class="hotline">
+          Bereits auf einer gebuchten Reise und ein dringendes Anliegen? Unsere Notfall-Hotline ist rund um die Uhr erreichbar:
+          <b>+49&nbsp;30&nbsp;1234500</b>
+        </div>
+      </div>
+      <div id="kontakt">
+        <p class="eyebrow">Kontakt &amp; Anfahrt</p>
+        <h2>So erreichen Sie uns.</h2>
+        <ul class="contact-list">
+          <li><span class="lbl">Telefon / Beratung</span><span class="val"><a href="tel:+49301234567">+49 30 1234567</a></span></li>
+          <li><span class="lbl">E-Mail</span><span class="val"><a href="mailto:service@voyanda-reisen.fake">service@voyanda-reisen.fake</a></span></li>
+          <li><span class="lbl">Filiale</span><span class="val">Musterstraße 12, 12345 Musterstadt</span></li>
+          <li><span class="lbl">Anfahrt</span><span class="val">5 Gehminuten vom Hauptbahnhof · Parkhaus „City-Center" gegenüber</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="band" id="faq">
+  <div class="wrap">
+    <div class="band-head">
+      <h2>Häufige Fragen</h2>
+      <p class="note">Kurz beantwortet. Für Ihr konkretes Anliegen sprechen Sie uns gerne direkt an.</p>
+    </div>
+    <div class="faq">
+      <details class="faq-item">
+        <summary class="faq-q">Kann ich nur einen Flug ohne Hotel buchen?<span class="mark"></span></summary>
+        <div class="faq-a">Ja, reine Flugbuchungen sind möglich. Nennen Sie uns Abflugort, Ziel, Wunschtermin und die Anzahl der Reisenden, dann suchen wir passende Verbindungen heraus.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Gibt es beim Hotel eine kostenlose Stornierung?<span class="mark"></span></summary>
+        <div class="faq-a">Das hängt von Hotel und Tarif ab. Den jeweiligen Stornotarif weisen wir vor der Buchung aus, sodass Sie die Bedingungen vorher kennen.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Brauche ich für den Mietwagen eine Kreditkarte?<span class="mark"></span></summary>
+        <div class="faq-a">Für die Kaution wird meist eine Kreditkarte verlangt, dazu ein Mindestalter je nach Land – häufig 21 Jahre. Vollkasko ohne Selbstbeteiligung lässt sich dazubuchen.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Was ist der Unterschied zwischen Reiserücktritt und Reiseabbruch?<span class="mark"></span></summary>
+        <div class="faq-a">Die Rücktrittsversicherung greift vor Reisebeginn (z. B. bei Krankheit vor Antritt), die Abbruchversicherung während der Reise. Beides vermitteln wir einzeln, als Kombi-Paket oder als Jahresschutz.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Welche Zahlungsarten bieten Sie an?<span class="mark"></span></summary>
+        <div class="faq-a">Überweisung, EC- und Kreditkarte sowie in der Filiale Barzahlung. Bei vielen Reisen wird eine Anzahlung fällig, der Restbetrag dann vor Reiseantritt.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Kann ich einen Beratungstermin vereinbaren?<span class="mark"></span></summary>
+        <div class="faq-a">Ja, persönlich vor Ort oder telefonisch, nach Terminvereinbarung. Für komplexe Reisen wie Exklusiv-, Rund- oder Gruppenreisen empfehlen wir einen Termin.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="brand" href="#top">
+        <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+          <circle cx="13" cy="13" r="12" stroke="#102F2D" stroke-width="1.5"/>
+          <path d="M1.6 15.5h22.8" stroke="#102F2D" stroke-width="1.5"/>
+          <circle cx="13" cy="10.5" r="4.4" fill="#DD9A2B"/>
+        </svg>
+        Voyanda&nbsp;Reisen
+      </a>
+      <ul class="foot-links">
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#zeiten">Öffnungszeiten</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+        <li><a href="#faq">Fragen</a></li>
+      </ul>
+    </div>
+    <p class="disclaimer">
+      Demo-Seite von Voyanda Reisen Ltd. · www.voyanda-reisen.fake — Firmenname, Adressen, Telefonnummern,
+      E-Mail-Adressen und Preise sind frei erfunden und dienen nur zu Test- und Präsentationszwecken.
+      Kein reales Reiseangebot.
+    </p>
+  </div>
+</footer>
+
+<!-- ===================== CHAT-LAUNCHER (DUMMY-PLATZHALTER) ===================== -->
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="WebChat-Platzhalter">
+  <p class="eyebrow">WebChat</p>
+  <h3>Hier entsteht der Chat</h3>
+  <p>An dieser Stelle erscheint später der WxConnect-WebChat. Das Install-Script aus Webex&nbsp;Engage wird vor <code>&lt;/body&gt;</code> eingefügt; danach kann dieser Dummy-Button entfernt werden.</p>
+</div>
+<button class="chat-fab" id="chatFab" aria-label="Chat öffnen (Platzhalter)">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M4 5h16v11H8l-4 4V5z" stroke="#0C2A2C" stroke-width="1.8" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<script>
+  // Mobile-Navigation
+  const navToggle = document.getElementById('navToggle');
+  const navLinks  = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.addEventListener('click', e => {
+    if (e.target.tagName === 'A') { navLinks.classList.remove('open'); navToggle.setAttribute('aria-expanded','false'); }
+  });
+
+  // FAQ: nur ein Eintrag gleichzeitig offen
+  const items = document.querySelectorAll('details.faq-item');
+  items.forEach(d => d.addEventListener('toggle', () => {
+    if (d.open) items.forEach(o => { if (o !== d) o.open = false; });
+  }));
+
+  // Dummy-Chat-Launcher (wird später durch das echte Engage-Snippet ersetzt)
+  const fab = document.getElementById('chatFab');
+  const panel = document.getElementById('chatPanel');
+  fab.addEventListener('click', () => panel.classList.toggle('open'));
+</script>
+
+<!-- =========================================================================
+     WxCONNECT / WEBEX ENGAGE  –  LIVECHAT-EINBINDUNG (SPÄTER)
+
+     1. In Webex Engage:  Assets > Channel assets > Livechat
+        > gewünschtes Asset bearbeiten > Reiter "Installation" > Copy.
+     2. Das kopierte <script>...</script>-Snippet HIER, direkt vor </body>,
+        einfügen. Der Launcher erscheint dann unten rechts.
+     3. Diese Seiten-Domain (deine  *.github.io  URL) in Webex Engage
+        als erlaubte Domain / Whitelist eintragen - sonst laedt der
+        Launcher nicht.
+     4. Danach den Dummy-Button oben (id="chatFab" + Panel) entfernen.
+
+     Doku:  https://help.webexconnect.io/docs/livechat
+========================================================================= -->
+
+</body>
+</html>
